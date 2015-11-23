@@ -163,8 +163,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     /* save the current memeImage */
     func save() {
+        
         //Create the meme
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: memedImage)
+        
+        //add the meme to the shared data model
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
     }
    
 }
