@@ -11,8 +11,19 @@ import UIKit
 private let reuseIdentifier = "Cell"
 
 class MemeCollectionViewController: UICollectionViewController {
+   
     var memes: [Meme] {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
+    }
+    
+    @IBAction func createMeme(sender: AnyObject) {
+        let viewController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! ViewController
+        presentViewController(viewController, animated: true, completion: nil)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView!.reloadData()
     }
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
@@ -57,11 +68,8 @@ class MemeCollectionViewController: UICollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let viewController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! ViewController
-        let meme = memes[indexPath.row]
-        viewController.imagePickerView.image = meme.originalImage
-        viewController.topTextField.text = meme.topText
-        viewController.bottomTextField.text = meme.bottomText
-        navigationController!.pushViewController(viewController, animated: true)
+        viewController.meme = memes[indexPath.row]
+        presentViewController(viewController, animated: true, completion: nil)
     }
 
 }

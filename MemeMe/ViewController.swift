@@ -18,6 +18,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     var memedImage: UIImage!
+    var meme: Meme?
     
     /* default attributes used for bottom and top text fields */
     let memeTextAttributes = [
@@ -32,19 +33,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         //camera button is enabled only if the environment contains a camera
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-        shareButton.enabled = false
         
         //initialize top text field
         topTextField.defaultTextAttributes = memeTextAttributes
         topTextField.textAlignment = NSTextAlignment.Center
-        topTextField.text = "TOP"
         topTextField.delegate = self
         
         //initialize bottom text field
         bottomTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.textAlignment = NSTextAlignment.Center
-        bottomTextField.text = "BOTTOM"
         bottomTextField.delegate = self
+        
+        if let meme = meme  {
+            
+            topTextField.text = meme.topText
+            bottomTextField.text = meme.bottomText
+            imagePickerView.image = meme.originalImage
+        }
+        
+        shareButton.enabled = false
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
+        
     }
     
     /* subcribe to keyboard events to fix the overlap between the keyboard and bottom text field */
