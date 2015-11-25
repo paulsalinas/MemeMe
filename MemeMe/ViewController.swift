@@ -49,6 +49,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             topTextField.text = meme.topText
             bottomTextField.text = meme.bottomText
             imagePickerView.image = meme.originalImage
+            shareButton.enabled = true
+            return
         }
         
         shareButton.enabled = false
