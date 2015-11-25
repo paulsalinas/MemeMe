@@ -64,21 +64,36 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="DdI-No-TTd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kGt-Tt-hWS">
-                            <size key="itemSize" width="129" height="130"/>
+                            <size key="itemSize" width="239" height="225"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MemeCollectionViewCell" id="3i6-cs-vdC" customClass="MemeCollectionViewCell" customModule="MemeMe" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="129" height="130"/>
+                                <rect key="frame" x="0.0" y="64" width="239" height="225"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="129" height="130"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="239" height="225"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4AV-2H-njT">
+                                            <rect key="frame" x="0.0" y="0.0" width="239" height="225"/>
+                                        </imageView>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="4AV-2H-njT" firstAttribute="top" secondItem="3i6-cs-vdC" secondAttribute="topMargin" constant="-8" id="3JU-6a-MIX"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="4AV-2H-njT" secondAttribute="bottom" constant="-8" id="PWT-h9-aCn"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="4AV-2H-njT" secondAttribute="trailing" constant="-8" id="nKF-nc-Crz"/>
+                                    <constraint firstItem="4AV-2H-njT" firstAttribute="leading" secondItem="3i6-cs-vdC" secondAttribute="leadingMargin" constant="-8" id="wGY-dF-br5"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="4AV-2H-njT" id="yB1-ai-5cM"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
