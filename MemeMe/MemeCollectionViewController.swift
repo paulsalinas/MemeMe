@@ -32,16 +32,30 @@ class MemeCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        // clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
         let space: CGFloat = 3.0
-        let dimension = (self.view.frame.size.width - (2 * space)) / 3.0
+        let dimension = (view.frame.size.height - (2 * space)) / 3.0
         
         flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        flowLayout.itemSize = CGSizeMake(dimension, dimension)
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        let width = view.frame.size.width
+        let height = view.frame.size.height
+        let space: CGFloat = width <= height ? 3.0 : 0
+        let dimension: CGFloat =  width <= height ? (width - (2 * space)) / 3.0 : width / 6.0
+        
+        print(width)
+        print(dimension)
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSizeMake(dimension, dimension)
     }
 
@@ -59,10 +73,7 @@ class MemeCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionViewCell", forIndexPath: indexPath) as! MemeCollectionViewCell
         let meme = memes[indexPath.item]
         
-//        cell.setText(meme.top, bottomString: meme.bottom)
-        let imageView = UIImageView(image: meme.memedImage)
-        cell.backgroundView = imageView
-        
+        cell.imageView.image = meme.originalImage
         return cell
     }
     
