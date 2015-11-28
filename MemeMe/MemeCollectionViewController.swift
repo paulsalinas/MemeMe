@@ -28,6 +28,20 @@ class MemeCollectionViewController: UICollectionViewController {
     
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
+    
+    func adjustFlowLayout(size: CGSize) {
+        let space: CGFloat = 1.5
+        let dimension:CGFloat = size.width >= size.height ? (size.width - (5 * space)) / 6.0 :  (size.width - (2 * space)) / 3.0
+        
+        print(size.width)
+        print(size.height)
+        print(dimension)
+        print(space)
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        flowLayout.itemSize = CGSizeMake(dimension, dimension)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,27 +50,13 @@ class MemeCollectionViewController: UICollectionViewController {
 
         // Register cell classes
         collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
-        let space: CGFloat = 3.0
-        let dimension = (view.frame.size.height - (2 * space)) / 3.0
         
-        flowLayout.minimumInteritemSpacing = space
-        flowLayout.minimumLineSpacing = space
-        flowLayout.itemSize = CGSizeMake(dimension, dimension)
+        // Do any additional setup after loading the view.
+        adjustFlowLayout(self.view.frame.size)
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        let width = view.frame.size.width
-        let height = view.frame.size.height
-        let space: CGFloat = width <= height ? 3.0 : 0
-        let dimension: CGFloat =  width <= height ? (width - (2 * space)) / 3.0 : width / 6.0
-        
-        print(width)
-        print(dimension)
-        flowLayout.minimumInteritemSpacing = space
-        flowLayout.minimumLineSpacing = space
-        flowLayout.itemSize = CGSizeMake(dimension, dimension)
+        adjustFlowLayout(size)
     }
 
     override func didReceiveMemoryWarning() {
