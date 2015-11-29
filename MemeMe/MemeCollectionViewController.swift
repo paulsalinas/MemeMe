@@ -32,11 +32,7 @@ class MemeCollectionViewController: UICollectionViewController {
     func adjustFlowLayout(size: CGSize) {
         let space: CGFloat = 1.5
         let dimension:CGFloat = size.width >= size.height ? (size.width - (5 * space)) / 6.0 :  (size.width - (2 * space)) / 3.0
-        
-        print(size.width)
-        print(size.height)
-        print(dimension)
-        print(space)
+    
         flowLayout.minimumInteritemSpacing = space
         flowLayout.minimumLineSpacing = space
         flowLayout.itemSize = CGSizeMake(dimension, dimension)
@@ -58,11 +54,6 @@ class MemeCollectionViewController: UICollectionViewController {
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         adjustFlowLayout(size)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return memes.count
@@ -74,6 +65,10 @@ class MemeCollectionViewController: UICollectionViewController {
         let meme = memes[indexPath.item]
         
         cell.imageView.image = meme.originalImage
+        cell.topLabel.text = meme.topText
+        cell.topLabel.attributedText = NSAttributedString(string: meme.topText, attributes: Meme.getTextAttributes(12))
+        cell.bottomLabel.text = meme.bottomText
+        cell.bottomLabel.attributedText = NSAttributedString(string: meme.bottomText, attributes: Meme.getTextAttributes(12))
         return cell
     }
     

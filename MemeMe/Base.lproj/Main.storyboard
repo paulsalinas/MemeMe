@@ -82,17 +82,35 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4AV-2H-njT">
                                             <rect key="frame" x="0.0" y="0.0" width="239" height="225"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQy-o9-6Tn">
+                                            <rect key="frame" x="105" y="18" width="28" height="20"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bottom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1m-Bh-D9A">
+                                            <rect key="frame" x="91" y="189" width="56" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
                                     <constraint firstItem="4AV-2H-njT" firstAttribute="top" secondItem="3i6-cs-vdC" secondAttribute="topMargin" constant="-8" id="3JU-6a-MIX"/>
+                                    <constraint firstItem="n1m-Bh-D9A" firstAttribute="top" secondItem="4AV-2H-njT" secondAttribute="bottom" constant="-36" id="Az1-Cq-TW9"/>
+                                    <constraint firstItem="n1m-Bh-D9A" firstAttribute="centerX" secondItem="4AV-2H-njT" secondAttribute="centerX" id="JGX-Ux-LLV"/>
+                                    <constraint firstItem="4AV-2H-njT" firstAttribute="top" secondItem="bQy-o9-6Tn" secondAttribute="bottom" constant="-38" id="OGG-jx-roT"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="4AV-2H-njT" secondAttribute="bottom" constant="-8" id="PWT-h9-aCn"/>
+                                    <constraint firstItem="bQy-o9-6Tn" firstAttribute="centerX" secondItem="4AV-2H-njT" secondAttribute="centerX" id="ZTA-3U-AGO"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="4AV-2H-njT" secondAttribute="trailing" constant="-8" id="nKF-nc-Crz"/>
                                     <constraint firstItem="4AV-2H-njT" firstAttribute="leading" secondItem="3i6-cs-vdC" secondAttribute="leadingMargin" constant="-8" id="wGY-dF-br5"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="bottomLabel" destination="n1m-Bh-D9A" id="eoZ-Ey-gst"/>
                                     <outlet property="imageView" destination="4AV-2H-njT" id="yB1-ai-5cM"/>
+                                    <outlet property="topLabel" destination="bQy-o9-6Tn" id="Jjq-Ae-bi0"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

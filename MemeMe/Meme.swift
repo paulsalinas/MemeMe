@@ -19,4 +19,15 @@ struct Meme {
         self.originalImage = originalImage
         self.memedImage = memedImage
     }
+    
+    static func getTextAttributes(fontSize: CGFloat) -> [String: NSObject]
+    {
+        return [
+            NSStrokeColorAttributeName : UIColor.blackColor(),
+            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: fontSize)!,
+            NSStrokeWidthAttributeName : -3.0
+        ]
+    }
+    
 }

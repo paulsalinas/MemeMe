@@ -23,6 +23,7 @@ class MemeTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        self.tableView.allowsMultipleSelectionDuringEditing = false
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,7 +48,6 @@ class MemeTableViewController: UITableViewController {
         let meme = memes[indexPath.row]
         
         // Set the name and image
-        //cell.textLabel?.text = villain.name
         cell.imageView?.image = meme.memedImage
         
         // If the cell has a detail label, we will put the evil scheme in.

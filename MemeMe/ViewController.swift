@@ -20,14 +20,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var memedImage: UIImage!
     var meme: Meme?
     
-    /* default attributes used for bottom and top text fields */
-    let memeTextAttributes = [
-        NSStrokeColorAttributeName : UIColor.blackColor(),
-        NSForegroundColorAttributeName : UIColor.whiteColor(),
-        NSFontAttributeName : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSStrokeWidthAttributeName : -3.0
-    ]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,12 +27,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         
         //initialize top text field
-        topTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.defaultTextAttributes = Meme.getTextAttributes(40)
         topTextField.textAlignment = NSTextAlignment.Center
         topTextField.delegate = self
         
         //initialize bottom text field
-        bottomTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.defaultTextAttributes = Meme.getTextAttributes(40)
         bottomTextField.textAlignment = NSTextAlignment.Center
         bottomTextField.delegate = self
         
