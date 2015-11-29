@@ -28,8 +28,10 @@ class MemeTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        tableView.rowHeight = tableView.frame.height / 6
+        
         tableView.reloadData()
-        //da
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,16 +46,13 @@ class MemeTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell")!
+        let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell") as! MemeTableViewCell
         let meme = memes[indexPath.row]
         
         // Set the name and image
-        cell.imageView?.image = meme.memedImage
-        
-        // If the cell has a detail label, we will put the evil scheme in.
-//        if let detailTextLabel = cell.detailTextLabel {
-//            detailTextLabel.text = "Scheme: \(villain.evilScheme)"
-//        }
+        cell.memeImage?.image = meme.originalImage
+        cell.topLabel.attributedText = NSAttributedString(string: meme.topText, attributes: Meme.getTextAttributes(20))
+        cell.bottomLabel.attributedText = NSAttributedString(string: meme.bottomText, attributes: Meme.getTextAttributes(20))
         
         return cell
     }

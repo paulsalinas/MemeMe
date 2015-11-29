@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="V4I-9V-Oax">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -138,34 +139,65 @@
         <scene sceneID="ANS-lu-Dpl">
             <objects>
                 <tableViewController id="we2-oC-xhX" customClass="MemeTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="1oT-1c-M77">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="128" sectionHeaderHeight="28" sectionFooterHeight="28" id="1oT-1c-M77">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeTableCell" textLabel="Nt9-Oe-JOm" detailTextLabel="1P3-Tm-F6G" style="IBUITableViewCellStyleSubtitle" id="t2F-xW-Q5y">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeTableCell" rowHeight="128" id="t2F-xW-Q5y" customClass="MemeTableViewCell" customModule="MemeMe" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="128"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t2F-xW-Q5y" id="KG3-9h-M2q">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="127.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nt9-Oe-JOm">
-                                            <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1P3-Tm-F6G">
-                                            <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QHp-hl-QyC">
+                                            <rect key="frame" x="8" y="13" width="107" height="107"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="QHp-hl-QyC" secondAttribute="height" multiplier="1:1" id="H4X-2h-VkO"/>
+                                            </constraints>
+                                        </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apv-5W-2dS">
+                                            <rect key="frame" x="113" y="0.0" width="429" height="127.5"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bottom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QNL-s6-H57">
+                                                    <rect key="frame" x="186.5" y="81" width="56" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhq-eQ-M6G">
+                                                    <rect key="frame" x="200" y="29" width="29" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="Rhq-eQ-M6G" firstAttribute="centerX" secondItem="apv-5W-2dS" secondAttribute="centerX" id="aFn-iV-Fg6"/>
+                                                <constraint firstItem="QNL-s6-H57" firstAttribute="centerX" secondItem="apv-5W-2dS" secondAttribute="centerX" id="dKW-ib-ATk"/>
+                                                <constraint firstAttribute="bottom" secondItem="QNL-s6-H57" secondAttribute="bottom" constant="25.5" id="gzp-mX-mJ5"/>
+                                                <constraint firstItem="Rhq-eQ-M6G" firstAttribute="top" secondItem="apv-5W-2dS" secondAttribute="top" constant="29" id="qXw-rq-USu"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="QHp-hl-QyC" secondAttribute="bottom" id="FaR-xd-jQR"/>
+                                        <constraint firstItem="apv-5W-2dS" firstAttribute="leading" secondItem="QHp-hl-QyC" secondAttribute="trailing" constant="-2" id="GsR-Su-lax"/>
+                                        <constraint firstItem="apv-5W-2dS" firstAttribute="top" secondItem="KG3-9h-M2q" secondAttribute="topMargin" constant="-8" id="Ohk-sj-bYN"/>
+                                        <constraint firstItem="QHp-hl-QyC" firstAttribute="top" secondItem="KG3-9h-M2q" secondAttribute="topMargin" constant="5" id="TMY-7A-hvD"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="apv-5W-2dS" secondAttribute="trailing" constant="50" id="ZN1-nd-U0q"/>
+                                        <constraint firstItem="QHp-hl-QyC" firstAttribute="leading" secondItem="KG3-9h-M2q" secondAttribute="leadingMargin" id="pCH-67-wDX"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="apv-5W-2dS" secondAttribute="bottom" constant="-8" id="tGY-eP-Kd8"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="TopLabel" destination="Rhq-eQ-M6G" id="WTo-Db-Sfy"/>
+                                    <outlet property="bottomLabel" destination="QNL-s6-H57" id="WTp-G7-9pq"/>
+                                    <outlet property="memeImage" destination="QHp-hl-QyC" id="Y9G-Gb-2lw"/>
+                                    <outlet property="topLabel" destination="Rhq-eQ-M6G" id="SBr-0X-DxV"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
