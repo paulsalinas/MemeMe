@@ -206,6 +206,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="9Bw-52-MOK">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="vDa-Ns-azf">
+                            <connections>
+                                <action selector="editTableRows:" destination="we2-oC-xhX" id="dMq-2I-5zY"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="C0z-yQ-Ufm"/>
                     </navigationItem>
                 </tableViewController>

@@ -13,6 +13,21 @@ class MemeTableViewController: UITableViewController {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
     }
  
+    @IBAction func editTableRows(sender: AnyObject) {
+        tableView.allowsMultipleSelectionDuringEditing = false
+        //tableView.editing = true
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        //remove the meme to the shared data model
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.removeAtIndex(indexPath.row)
+        
+        tableView.reloadData()
+    }
+    
     
     @IBAction func createMeme(sender: AnyObject) {
         let viewController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! ViewController
@@ -23,14 +38,13 @@ class MemeTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.tableView.allowsMultipleSelectionDuringEditing = false
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         tableView.rowHeight = tableView.frame.height / 6
-        
         tableView.reloadData()
     }
 
