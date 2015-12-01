@@ -16,7 +16,7 @@ class MemeCollectionViewController: UICollectionViewController {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
     }
     
-    var editMemeController: ViewController!
+    var editMemeController: MemeEditViewController!
     
     @IBAction func createMeme(sender: AnyObject) {
         presentViewController(editMemeController, animated: true, completion: nil)
@@ -49,7 +49,7 @@ class MemeCollectionViewController: UICollectionViewController {
         adjustFlowLayout(self.view.frame.size)
         
         //initially present an empty create meme modal
-        editMemeController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! ViewController
+        editMemeController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
         presentViewController(editMemeController, animated: false, completion: nil)
     }
     
@@ -75,7 +75,7 @@ class MemeCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let viewController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! ViewController
+        let viewController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
         viewController.meme = memes[indexPath.row]
         presentViewController(viewController, animated: true, completion: nil)
     }

@@ -30,7 +30,7 @@ class MemeTableViewController: UITableViewController {
     
     
     @IBAction func createMeme(sender: AnyObject) {
-        let viewController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! ViewController
+        let viewController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
         presentViewController(viewController, animated: true, completion: nil)
     }
     
@@ -72,7 +72,7 @@ class MemeTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let viewController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! ViewController
+        let viewController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
         viewController.meme = memes[indexPath.row]
         presentViewController(viewController, animated: true, completion: nil)
     }
