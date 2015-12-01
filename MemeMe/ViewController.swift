@@ -17,6 +17,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    
+    
+    @IBAction func cancelEdit(sender: AnyObject) {
+        presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     var memedImage: UIImage!
     var meme: Meme?
     
@@ -61,6 +68,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
+        
+        shareButton.enabled = false
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
+        imagePickerView.image = nil
     }
     
     /* launch activity view with the memed image as the activity item  */
@@ -70,7 +82,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         activityView.completionWithItemsHandler = { activity, success, items, error in
             if success {
                 self.save()
+                self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
             }
+
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         
@@ -167,7 +181,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     /* save the current memeImage */
     func save() {
-        
         //Create the meme
         let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: memedImage)
         
@@ -175,6 +188,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         appDelegate.memes.append(meme)
+        
     }
    
 }

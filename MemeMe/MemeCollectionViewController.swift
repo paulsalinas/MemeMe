@@ -16,9 +16,10 @@ class MemeCollectionViewController: UICollectionViewController {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
     }
     
+    var editMemeController: ViewController!
+    
     @IBAction func createMeme(sender: AnyObject) {
-        let viewController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! ViewController
-        presentViewController(viewController, animated: true, completion: nil)
+        presentViewController(editMemeController, animated: true, completion: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -41,14 +42,15 @@ class MemeCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // clearsSelectionOnViewWillAppear = false
-
         // Register cell classes
         collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         // Do any additional setup after loading the view.
         adjustFlowLayout(self.view.frame.size)
+        
+        //initially present an empty create meme modal
+        editMemeController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! ViewController
+        presentViewController(editMemeController, animated: false, completion: nil)
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
