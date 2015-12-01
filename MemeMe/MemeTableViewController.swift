@@ -12,10 +12,16 @@ class MemeTableViewController: UITableViewController {
     var memes: [Meme] {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
     }
+
+    func showEditMeme(state: MemeEditViewController.initialViewState, animated: Bool, meme: Meme?) {
+        let editMemeController = storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
+        editMemeController.initialState = state
+        editMemeController.meme = meme
+        presentViewController(editMemeController, animated: animated, completion: nil)
+    }
  
     @IBAction func editTableRows(sender: AnyObject) {
         tableView.allowsMultipleSelectionDuringEditing = false
-        //tableView.editing = true
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -27,18 +33,16 @@ class MemeTableViewController: UITableViewController {
         
         tableView.reloadData()
     }
-    
-    
+
     @IBAction func createMeme(sender: AnyObject) {
-        let viewController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
-        presentViewController(viewController, animated: true, completion: nil)
+        showEditMeme(MemeEditViewController.initialViewState.Create, animated: true, meme: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        
+        //show the edit meme dialog when the app first loads (this will be the first view that the app loads)
+        showEditMeme(MemeEditViewController.initialViewState.AppLoad, animated: false, meme: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -72,8 +76,6 @@ class MemeTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let viewController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
-        viewController.meme = memes[indexPath.row]
-        presentViewController(viewController, animated: true, completion: nil)
+        showEditMeme(MemeEditViewController.initialViewState.Edit, animated: true, meme: memes[indexPath.row])
     }
 }

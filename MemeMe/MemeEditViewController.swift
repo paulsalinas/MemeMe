@@ -19,13 +19,16 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
-    
-    @IBAction func cancelEdit(sender: AnyObject) {
-        presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     var memedImage: UIImage!
     var meme: Meme?
+    var initialState : initialViewState?
+    
+    enum initialViewState {
+        case AppLoad
+        case Create
+        case Edit
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,37 +45,48 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         bottomTextField.defaultTextAttributes = Meme.getTextAttributes(40)
         bottomTextField.textAlignment = NSTextAlignment.Center
         bottomTextField.delegate = self
-        
-        if let meme = meme  {
-            
-            topTextField.text = meme.topText
-            bottomTextField.text = meme.bottomText
-            imagePickerView.image = meme.originalImage
-            shareButton.enabled = true
-            return
-        }
-        
-        shareButton.enabled = false
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
-        
     }
     
     /* subcribe to keyboard events to fix the overlap between the keyboard and bottom text field */
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
+        
+        guard let initialState = initialState else {
+            return
+        }
+        
+        //switch on the posisble 3 states that this view can be in
+        switch initialState {
+        case .AppLoad:
+            topTextField.text = "TOP"
+            bottomTextField.text = "BOTTOM"
+            cancelButton.enabled = false
+        case .Create:
+            topTextField.text = "TOP"
+            bottomTextField.text = "BOTTOM"
+            cancelButton.enabled = true
+        case .Edit:
+            if let meme = meme  {
+                topTextField.text = meme.topText
+                bottomTextField.text = meme.bottomText
+                imagePickerView.image = meme.originalImage
+                shareButton.enabled = true
+            }
+        }
+        
+        //enable the share button only if there's an image
+        shareButton.enabled = imagePickerView.image != nil
     }
     
     /* unsubcribe to the keyboard event here */
     override func viewDidDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
-        
-        shareButton.enabled = false
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
-        imagePickerView.image = nil
+    }
+    
+    @IBAction func cancelEdit(sender: AnyObject) {
+        presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
     }
     
     /* launch activity view with the memed image as the activity item  */
@@ -112,7 +126,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         
         imagePickerView.image = image
         dismissViewControllerAnimated(true, completion: nil)
-        shareButton.enabled = true
     }
     
     /* close image picker on cancel */
@@ -190,6 +203,5 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         appDelegate.memes.append(meme)
         
     }
-   
 }
 

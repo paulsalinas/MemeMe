@@ -16,10 +16,15 @@ class MemeCollectionViewController: UICollectionViewController {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
     }
     
-    var editMemeController: MemeEditViewController!
+    func showEditMeme(state: MemeEditViewController.initialViewState, animated: Bool, meme: Meme?) {
+        let editMemeController = storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
+        editMemeController.initialState = state
+        editMemeController.meme = meme
+        presentViewController(editMemeController, animated: animated, completion: nil)
+    }
     
     @IBAction func createMeme(sender: AnyObject) {
-        presentViewController(editMemeController, animated: true, completion: nil)
+        showEditMeme(MemeEditViewController.initialViewState.Create, animated: true, meme: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -47,10 +52,6 @@ class MemeCollectionViewController: UICollectionViewController {
         
         // Do any additional setup after loading the view.
         adjustFlowLayout(self.view.frame.size)
-        
-        //initially present an empty create meme modal
-        editMemeController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
-        presentViewController(editMemeController, animated: false, completion: nil)
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -75,9 +76,7 @@ class MemeCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let viewController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
-        viewController.meme = memes[indexPath.row]
-        presentViewController(viewController, animated: true, completion: nil)
+        showEditMeme(MemeEditViewController.initialViewState.Edit, animated: true, meme: memes[indexPath.row])
     }
 
 }
