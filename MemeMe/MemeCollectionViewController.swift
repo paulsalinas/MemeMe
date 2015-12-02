@@ -12,8 +12,8 @@ private let reuseIdentifier = "Cell"
 
 class MemeCollectionViewController: UICollectionViewController {
    
-    var memes: [Meme] {
-        return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
+    var memesCollection: MemesCollection {
+        return (UIApplication.sharedApplication().delegate as! AppDelegate).memesCollection
     }
     
     func showEditMeme(state: MemeEditViewController.initialViewState, animated: Bool, meme: Meme?) {
@@ -59,13 +59,13 @@ class MemeCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return memes.count
+        return memesCollection.numberOfMemes()
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionViewCell", forIndexPath: indexPath) as! MemeCollectionViewCell
-        let meme = memes[indexPath.item]
+        let meme = memesCollection.memeAtIndex(indexPath.item)
         
         cell.imageView.image = meme.originalImage
         cell.topLabel.text = meme.topText
@@ -76,7 +76,7 @@ class MemeCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        showEditMeme(MemeEditViewController.initialViewState.Edit, animated: true, meme: memes[indexPath.row])
+        showEditMeme(MemeEditViewController.initialViewState.Edit, animated: true, meme: memesCollection.memeAtIndex(indexPath.item))
     }
 
 }

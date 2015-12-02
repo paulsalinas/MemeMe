@@ -200,7 +200,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         //add the meme to the shared data model
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
-        appDelegate.memes.append(meme)
+        appDelegate.memesCollection.appendMeme(meme)
         
     }
 }

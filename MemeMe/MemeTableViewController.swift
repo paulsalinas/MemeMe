@@ -9,8 +9,8 @@
 import UIKit
 
 class MemeTableViewController: UITableViewController {
-    var memes: [Meme] {
-        return (UIApplication.sharedApplication().delegate as! AppDelegate).memes
+    var memesCollection: MemesCollection {
+        return (UIApplication.sharedApplication().delegate as! AppDelegate).memesCollection
     }
 
     func showEditMeme(state: MemeEditViewController.initialViewState, animated: Bool, meme: Meme?) {
@@ -27,9 +27,7 @@ class MemeTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         //remove the meme to the shared data model
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
-        appDelegate.memes.removeAtIndex(indexPath.row)
+        memesCollection.removeMemeAtIndex(indexPath.row)
         
         tableView.reloadData()
     }
@@ -59,13 +57,13 @@ class MemeTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memes.count
+        return memesCollection.numberOfMemes()
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell") as! MemeTableViewCell
-        let meme = memes[indexPath.row]
+        let meme = memesCollection.memeAtIndex(indexPath.row)
         
         // Set the name and image
         cell.memeImage?.image = meme.originalImage
@@ -76,6 +74,6 @@ class MemeTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        showEditMeme(MemeEditViewController.initialViewState.Edit, animated: true, meme: memes[indexPath.row])
+        showEditMeme(MemeEditViewController.initialViewState.Edit, animated: true, meme: memesCollection.memeAtIndex(indexPath.row))
     }
 }
