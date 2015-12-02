@@ -20,6 +20,7 @@ struct Meme {
         self.memedImage = memedImage
     }
     
+    /* the text attributes for the text labels in the meme */
     static func getTextAttributes(fontSize: CGFloat) -> [String: NSObject]
     {
         return [
