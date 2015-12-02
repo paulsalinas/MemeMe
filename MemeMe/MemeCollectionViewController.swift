@@ -16,42 +16,21 @@ class MemeCollectionViewController: UICollectionViewController {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memesCollection
     }
     
-    func showEditMeme(state: MemeEditViewController.initialViewState, animated: Bool, meme: Meme?) {
-        let editMemeController = storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
-        editMemeController.initialState = state
-        editMemeController.meme = meme
-        presentViewController(editMemeController, animated: animated, completion: nil)
-    }
-    
-    @IBAction func createMeme(sender: AnyObject) {
-        showEditMeme(MemeEditViewController.initialViewState.Create, animated: true, meme: nil)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        collectionView!.reloadData()
-    }
-    
-    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
-    
-    
-    func adjustFlowLayout(size: CGSize) {
-        let space: CGFloat = 1.5
-        let dimension:CGFloat = size.width >= size.height ? (size.width - (5 * space)) / 6.0 :  (size.width - (2 * space)) / 3.0
-    
-        flowLayout.minimumInteritemSpacing = space
-        flowLayout.minimumLineSpacing = space
-        flowLayout.itemSize = CGSizeMake(dimension, dimension)
-    }
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Register cell classes
         collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         // Do any additional setup after loading the view.
         adjustFlowLayout(self.view.frame.size)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView!.reloadData()
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -77,6 +56,31 @@ class MemeCollectionViewController: UICollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         showEditMeme(MemeEditViewController.initialViewState.Edit, animated: true, meme: memesCollection.memeAtIndex(indexPath.item))
+    }
+    
+    @IBAction func createMeme(sender: AnyObject) {
+        showEditMeme(MemeEditViewController.initialViewState.Create, animated: true, meme: nil)
+    }
+    
+    
+    func showEditMeme(state: MemeEditViewController.initialViewState, animated: Bool, meme: Meme?) {
+        let editMemeController = storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
+        editMemeController.initialState = state
+        editMemeController.meme = meme
+        presentViewController(editMemeController, animated: animated, completion: nil)
+    }
+    
+    func adjustFlowLayout(size: CGSize) {
+        guard let flowLayout = flowLayout else {
+            return
+        }
+        
+        let space: CGFloat = 1.5
+        let dimension:CGFloat = size.width >= size.height ? (size.width - (5 * space)) / 6.0 :  (size.width - (2 * space)) / 3.0
+        
+        flowLayout.minimumInteritemSpacing = space
+        flowLayout.minimumLineSpacing = space
+        flowLayout.itemSize = CGSizeMake(dimension, dimension)
     }
 
 }

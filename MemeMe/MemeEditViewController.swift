@@ -29,7 +29,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         case Edit
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,34 +82,6 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     override func viewDidDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
-    }
-    
-    @IBAction func cancelEdit(sender: AnyObject) {
-        presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    /* launch activity view with the memed image as the activity item  */
-    @IBAction func shareMemeImage(sender: AnyObject) {
-        memedImage = generateMemedImage()
-        let activityView = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        activityView.completionWithItemsHandler = { activity, success, items, error in
-            if success {
-                self.save()
-                self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
-            }
-
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }
-        
-        presentViewController(activityView, animated: true, completion: nil)
-    }
-
-    @IBAction func pickAnImageFromCamera(sender: AnyObject) {
-       pickAnImageHelper(UIImagePickerControllerSourceType.Camera)
-    }
-    
-    @IBAction func pickAnImage(sender: AnyObject) {
-        pickAnImageHelper(UIImagePickerControllerSourceType.PhotoLibrary)
     }
     
     /* helper function to abstract the presentation of the image picker controller with a specific source type */
@@ -169,6 +140,34 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     func unsubscribeFromKeyboardNotifications() {
         NSNotificationCenter.defaultCenter().removeObserver(self, name:UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name:UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    @IBAction func cancelEdit(sender: AnyObject) {
+        presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    /* launch activity view with the memed image as the activity item  */
+    @IBAction func shareMemeImage(sender: AnyObject) {
+        memedImage = generateMemedImage()
+        let activityView = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        activityView.completionWithItemsHandler = { activity, success, items, error in
+            if success {
+                self.save()
+                self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        presentViewController(activityView, animated: true, completion: nil)
+    }
+    
+    @IBAction func pickAnImageFromCamera(sender: AnyObject) {
+        pickAnImageHelper(UIImagePickerControllerSourceType.Camera)
+    }
+    
+    @IBAction func pickAnImage(sender: AnyObject) {
+        pickAnImageHelper(UIImagePickerControllerSourceType.PhotoLibrary)
     }
     
     /* generate meme image */

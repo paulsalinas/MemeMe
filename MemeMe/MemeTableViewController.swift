@@ -12,29 +12,6 @@ class MemeTableViewController: UITableViewController {
     var memesCollection: MemesCollection {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memesCollection
     }
-
-    func showEditMeme(state: MemeEditViewController.initialViewState, animated: Bool, meme: Meme?) {
-        let editMemeController = storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
-        editMemeController.initialState = state
-        editMemeController.meme = meme
-        presentViewController(editMemeController, animated: animated, completion: nil)
-    }
- 
-    @IBAction func editTableRows(sender: AnyObject) {
-        tableView.allowsMultipleSelectionDuringEditing = false
-    }
-    
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        //remove the meme to the shared data model
-        memesCollection.removeMemeAtIndex(indexPath.row)
-        
-        tableView.reloadData()
-    }
-
-    @IBAction func createMeme(sender: AnyObject) {
-        showEditMeme(MemeEditViewController.initialViewState.Create, animated: true, meme: nil)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,12 +26,14 @@ class MemeTableViewController: UITableViewController {
         tableView.rowHeight = tableView.frame.height / 6
         tableView.reloadData()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        //remove the meme to the shared data model
+        memesCollection.removeMemeAtIndex(indexPath.row)
+        
+        tableView.reloadData()
+    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memesCollection.numberOfMemes()
@@ -75,5 +54,21 @@ class MemeTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         showEditMeme(MemeEditViewController.initialViewState.Edit, animated: true, meme: memesCollection.memeAtIndex(indexPath.row))
+    }
+    
+    /* IB Action Functions */
+    @IBAction func editTableRows(sender: AnyObject) {
+        tableView.allowsMultipleSelectionDuringEditing = false
+    }
+    
+    @IBAction func createMeme(sender: AnyObject) {
+        showEditMeme(MemeEditViewController.initialViewState.Create, animated: true, meme: nil)
+    }
+    
+    func showEditMeme(state: MemeEditViewController.initialViewState, animated: Bool, meme: Meme?) {
+        let editMemeController = storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
+        editMemeController.initialState = state
+        editMemeController.meme = meme
+        presentViewController(editMemeController, animated: animated, completion: nil)
     }
 }
