@@ -10,8 +10,6 @@ import UIKit
 
 class MemeTableViewCell: UITableViewCell {
 
-
-
     @IBOutlet weak var memeImage: UIImageView!
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var bottomLabel: UILabel!

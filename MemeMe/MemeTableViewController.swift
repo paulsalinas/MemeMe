@@ -19,9 +19,12 @@ class MemeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //set the size of the table based on initial orientation
         tableView.rowHeight = tableView.frame.height >= tableView.frame.width ? tableView.frame.height / 6 : tableView.frame.height / 3
+        
         memeDetailsPresenter = MemeDetailsPresenter(presenter: self)
         memeEditPresenter = MemeEditPresenter(presenter: self)
+
         
         //show the edit meme dialog when the app first loads (this will be the first view that the app loads)
         memeEditPresenter.present(nil, animated: false, viewState: MemeEditViewController.initialViewState.AppLoad)
@@ -34,6 +37,7 @@ class MemeTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    /* remove meme on swipe */
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         //remove the meme to the shared data model
@@ -59,11 +63,12 @@ class MemeTableViewController: UITableViewController {
         return cell
     }
     
+    /* show the details view when use selects a cell */
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
        memeDetailsPresenter.present(memesCollection.memeAtIndex(indexPath.row))
     }
     
-    /* IB Action Functions */
+    /* show the edit view in create mode when user clicks the button*/
     @IBAction func createMeme(sender: AnyObject) {
         memeEditPresenter.present(nil, animated: true, viewState: MemeEditViewController.initialViewState.Create)
     }

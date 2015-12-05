@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+/* helper class that abstracts the "push" of meme details controller to the navigation controller */
 class MemeDetailsPresenter {
     var presenter: UIViewController
     

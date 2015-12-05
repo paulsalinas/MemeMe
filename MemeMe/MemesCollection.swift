@@ -8,6 +8,7 @@
 
 import Foundation
 
+/*facade class the abstracts the meme collection*/
 class MemesCollection {
     var memes = [Meme]()
     

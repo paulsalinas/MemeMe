@@ -23,6 +23,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     var meme: Meme?
     var initialState : initialViewState?
     
+    /* the states of the view */
     enum initialViewState {
         case AppLoad
         case Create
@@ -55,7 +56,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
             return
         }
         
-        //switch on the posisble 3 states that this view can be in
+        //switch on the posisble 3 states that this view can be in and set the corresponding UI elements
         switch initialState {
         case .AppLoad:
             topTextField.text = "TOP"
@@ -66,6 +67,8 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
             bottomTextField.text = "BOTTOM"
             cancelButton.enabled = true
         case .Edit:
+            
+            //on Edit set the the UI elements to the meme's properties
             if let meme = meme  {
                 topTextField.text = meme.topText
                 bottomTextField.text = meme.bottomText
@@ -142,6 +145,7 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         NSNotificationCenter.defaultCenter().removeObserver(self, name:UIKeyboardWillHideNotification, object: nil)
     }
     
+    /* dismiss the view controller on Cancel */
     @IBAction func cancelEdit(sender: AnyObject) {
         presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
     }

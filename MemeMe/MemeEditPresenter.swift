@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+/* helper class that abstracts the modal presentation of meme edit controller to the navigation controller */
 class MemeEditPresenter {
     var presenter: UIViewController
     

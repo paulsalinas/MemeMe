@@ -66,9 +66,10 @@ class MemeCollectionViewController: UICollectionViewController {
     }
     
     @IBAction func createMeme(sender: AnyObject) {
-         memeEditPresenter.present(nil, animated: true, viewState: MemeEditViewController.initialViewState.Create)
+        memeEditPresenter.present(nil, animated: true, viewState: MemeEditViewController.initialViewState.Create)
     }
     
+    /* adjust flow layout based on size of the screen. typically portrait vs. landscape mode*/
     func adjustFlowLayout(size: CGSize) {
         guard let flowLayout = flowLayout else {
             return
