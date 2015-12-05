@@ -27,7 +27,7 @@
         <!--Table-->
         <scene sceneID="RTj-oZ-i9c">
             <objects>
-                <navigationController title="Table" id="w8b-0Z-W1c" sceneMemberID="viewController">
+                <navigationController id="w8b-0Z-W1c" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Table" image="collection" id="r1k-kV-hTi"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="a4t-kf-zS6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -44,7 +44,7 @@
         <!--Collection-->
         <scene sceneID="3S1-ij-03D">
             <objects>
-                <navigationController title="Collection" id="8Ky-DW-ERw" sceneMemberID="viewController">
+                <navigationController id="8Ky-DW-ERw" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Collection" image="collection" id="Qfv-mq-SIF"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="its-UQ-v1q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -58,10 +58,10 @@
             </objects>
             <point key="canvasLocation" x="-1671" y="-341"/>
         </scene>
-        <!--Sent Memes-->
+        <!--Meme Collection View Controller-->
         <scene sceneID="cp2-Su-Z0t">
             <objects>
-                <collectionViewController title="Sent Memes" id="aT4-RP-nUh" customClass="MemeCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="aT4-RP-nUh" customClass="MemeCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="DdI-No-TTd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,6 +121,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="iPO-J9-z5s">
+                        <barButtonItem key="backBarButtonItem" title="Sent Memes" id="tY6-RR-T01"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ckR-S1-bnd">
                             <connections>
                                 <action selector="createMeme:" destination="aT4-RP-nUh" id="mKA-hS-n5U"/>
@@ -135,10 +136,10 @@
             </objects>
             <point key="canvasLocation" x="-767" y="-326"/>
         </scene>
-        <!--Meme Details View Controller-->
+        <!--Meme Detail-->
         <scene sceneID="CHg-cG-v26">
             <objects>
-                <viewController storyboardIdentifier="MemeDetailsViewController" id="trL-cL-xac" customClass="MemeDetailsViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemeDetailsViewController" title="Meme Detail" id="trL-cL-xac" customClass="MemeDetailsViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8Wn-er-81o"/>
                         <viewControllerLayoutGuide type="bottom" id="JVc-m1-boV"/>
@@ -153,9 +154,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="JVc-m1-boV" firstAttribute="top" secondItem="BFB-mr-khK" secondAttribute="bottom" constant="-49" id="2tR-rv-DeQ"/>
+                            <constraint firstItem="JVc-m1-boV" firstAttribute="top" secondItem="BFB-mr-khK" secondAttribute="bottom" id="2tR-rv-DeQ"/>
                             <constraint firstItem="BFB-mr-khK" firstAttribute="leading" secondItem="PZc-s4-MQe" secondAttribute="leadingMargin" constant="-20" id="Aus-ZH-wEW"/>
-                            <constraint firstItem="BFB-mr-khK" firstAttribute="top" secondItem="8Wn-er-81o" secondAttribute="bottom" constant="-20" id="bgF-2H-o6u"/>
+                            <constraint firstItem="BFB-mr-khK" firstAttribute="top" secondItem="8Wn-er-81o" secondAttribute="bottom" constant="24" id="bgF-2H-o6u"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BFB-mr-khK" secondAttribute="trailing" constant="-20" id="xSE-v7-eO8"/>
                         </constraints>
                     </view>
@@ -174,10 +175,10 @@
             </objects>
             <point key="canvasLocation" x="25" y="29"/>
         </scene>
-        <!--Sent Memes-->
+        <!--Meme Table View Controller-->
         <scene sceneID="ANS-lu-Dpl">
             <objects>
-                <tableViewController title="Sent Memes" id="we2-oC-xhX" customClass="MemeTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="we2-oC-xhX" customClass="MemeTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="128" sectionHeaderHeight="28" sectionFooterHeight="28" id="1oT-1c-M77">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -245,6 +246,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="9Bw-52-MOK">
+                        <barButtonItem key="backBarButtonItem" title="Sent Memes" id="nG1-9M-yCB"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="C0z-yQ-Ufm">
                             <connections>
                                 <action selector="createMeme:" destination="we2-oC-xhX" id="DDp-I6-UzJ"/>
@@ -256,10 +258,10 @@
             </objects>
             <point key="canvasLocation" x="-771" y="433"/>
         </scene>
-        <!--Meme Edit View Controller-->
+        <!--Meme Editor-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="MemeEditorViewController" id="BYZ-38-t0r" customClass="MemeEditViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemeEditorViewController" title="Meme Editor" id="BYZ-38-t0r" customClass="MemeEditViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
