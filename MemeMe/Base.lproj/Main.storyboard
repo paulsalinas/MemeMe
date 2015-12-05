@@ -147,25 +147,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sYg-fO-o6a">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <items/>
-                            </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BFB-mr-khK">
                                 <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="JVc-m1-boV" firstAttribute="top" secondItem="BFB-mr-khK" secondAttribute="bottom" id="2tR-rv-DeQ"/>
-                            <constraint firstItem="BFB-mr-khK" firstAttribute="top" secondItem="sYg-fO-o6a" secondAttribute="bottom" id="AIX-DP-jtf"/>
+                            <constraint firstItem="JVc-m1-boV" firstAttribute="top" secondItem="BFB-mr-khK" secondAttribute="bottom" constant="-49" id="2tR-rv-DeQ"/>
                             <constraint firstItem="BFB-mr-khK" firstAttribute="leading" secondItem="PZc-s4-MQe" secondAttribute="leadingMargin" constant="-20" id="Aus-ZH-wEW"/>
-                            <constraint firstItem="sYg-fO-o6a" firstAttribute="leading" secondItem="PZc-s4-MQe" secondAttribute="leadingMargin" constant="-20" id="Pqf-Gy-RSN"/>
-                            <constraint firstItem="sYg-fO-o6a" firstAttribute="top" secondItem="PZc-s4-MQe" secondAttribute="topMargin" id="dH9-Qi-3gE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="sYg-fO-o6a" secondAttribute="trailing" constant="-20" id="j6S-qy-NMa"/>
+                            <constraint firstItem="BFB-mr-khK" firstAttribute="top" secondItem="8Wn-er-81o" secondAttribute="bottom" constant="-20" id="bgF-2H-o6u"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BFB-mr-khK" secondAttribute="trailing" constant="-20" id="xSE-v7-eO8"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="dsT-dh-Loh">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="IJl-4Z-Hex">
+                            <connections>
+                                <action selector="editMeme:" destination="trL-cL-xac" id="8cI-9U-4Mt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="memeImage" destination="BFB-mr-khK" id="SxF-Zh-hjJ"/>
                     </connections>
@@ -245,20 +245,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="9Bw-52-MOK">
-                        <barButtonItem key="leftBarButtonItem" title="Edit" id="vDa-Ns-azf">
-                            <connections>
-                                <action selector="editTableRows:" destination="we2-oC-xhX" id="dMq-2I-5zY"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="C0z-yQ-Ufm">
                             <connections>
                                 <action selector="createMeme:" destination="we2-oC-xhX" id="DDp-I6-UzJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="trL-cL-xac" kind="show" identifier="showMemeDetail" id="xeY-do-TVT"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Y5-rV-AKA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -55,7 +55,10 @@ class MemeCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        showEditMeme(MemeEditViewController.initialViewState.Edit, animated: true, meme: memesCollection.memeAtIndex(indexPath.item))
+        let detailsMemeController = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailsViewController") as! MemeDetailsViewController
+        detailsMemeController.meme = memesCollection.memeAtIndex(indexPath.row)
+        detailsMemeController.tabBarController?.tabBar.hidden = true
+        navigationController?.pushViewController(detailsMemeController, animated: true)
     }
     
     @IBAction func createMeme(sender: AnyObject) {
