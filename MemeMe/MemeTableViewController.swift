@@ -13,13 +13,19 @@ class MemeTableViewController: UITableViewController {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memesCollection
     }
     
+    var memeDetailsPresenter: MemeDetailsPresenter!
+    var memeEditPresenter: MemeEditPresenter!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //show the edit meme dialog when the app first loads (this will be the first view that the app loads)
-        showEditMeme(MemeEditViewController.initialViewState.AppLoad, animated: false, meme: nil)
-        
         tableView.rowHeight = tableView.frame.height >= tableView.frame.width ? tableView.frame.height / 6 : tableView.frame.height / 3
+        memeDetailsPresenter = MemeDetailsPresenter(presenter: self)
+        memeEditPresenter = MemeEditPresenter(presenter: self)
+        
+        //show the edit meme dialog when the app first loads (this will be the first view that the app loads)
+        memeEditPresenter.present(nil, animated: false, viewState: MemeEditViewController.initialViewState.AppLoad)
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -54,23 +60,12 @@ class MemeTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let detailsMemeController = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailsViewController") as! MemeDetailsViewController
-        detailsMemeController.meme = memesCollection.memeAtIndex(indexPath.row)
-        detailsMemeController.tabBarController?.tabBar.hidden = true
-        navigationController?.pushViewController(detailsMemeController, animated: true)
+       memeDetailsPresenter.present(memesCollection.memeAtIndex(indexPath.row))
     }
-    
-
     
     /* IB Action Functions */
     @IBAction func createMeme(sender: AnyObject) {
-        showEditMeme(MemeEditViewController.initialViewState.Create, animated: true, meme: nil)
+        memeEditPresenter.present(nil, animated: true, viewState: MemeEditViewController.initialViewState.Create)
     }
     
-    func showEditMeme(state: MemeEditViewController.initialViewState, animated: Bool, meme: Meme?) {
-        let editMemeController = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
-        editMemeController.initialState = state
-        editMemeController.meme = meme
-        presentViewController(editMemeController, animated: animated, completion: nil)
-    }
 }

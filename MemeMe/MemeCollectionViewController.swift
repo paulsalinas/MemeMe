@@ -16,6 +16,10 @@ class MemeCollectionViewController: UICollectionViewController {
         return (UIApplication.sharedApplication().delegate as! AppDelegate).memesCollection
     }
     
+    var memeDetailsPresenter: MemeDetailsPresenter!
+    var memeEditPresenter: MemeEditPresenter!
+
+    
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout?
     
     override func viewDidLoad() {
@@ -26,6 +30,9 @@ class MemeCollectionViewController: UICollectionViewController {
         
         // Do any additional setup after loading the view.
         adjustFlowLayout(self.view.frame.size)
+        memeDetailsPresenter = MemeDetailsPresenter(presenter: self)
+        memeEditPresenter = MemeEditPresenter(presenter: self)
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -55,22 +62,11 @@ class MemeCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let detailsMemeController = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailsViewController") as! MemeDetailsViewController
-        detailsMemeController.meme = memesCollection.memeAtIndex(indexPath.row)
-        detailsMemeController.tabBarController?.tabBar.hidden = true
-        navigationController?.pushViewController(detailsMemeController, animated: true)
+        memeDetailsPresenter.present(memesCollection.memeAtIndex(indexPath.row))
     }
     
     @IBAction func createMeme(sender: AnyObject) {
-        showEditMeme(MemeEditViewController.initialViewState.Create, animated: true, meme: nil)
-    }
-    
-    
-    func showEditMeme(state: MemeEditViewController.initialViewState, animated: Bool, meme: Meme?) {
-        let editMemeController = storyboard?.instantiateViewControllerWithIdentifier("MemeEditorViewController") as! MemeEditViewController
-        editMemeController.initialState = state
-        editMemeController.meme = meme
-        presentViewController(editMemeController, animated: animated, completion: nil)
+         memeEditPresenter.present(nil, animated: true, viewState: MemeEditViewController.initialViewState.Create)
     }
     
     func adjustFlowLayout(size: CGSize) {
