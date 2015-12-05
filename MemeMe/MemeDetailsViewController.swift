@@ -38,5 +38,6 @@ class MemeDetailsViewController: UIViewController {
     /* on edit meme, show the edit meme view*/
     @IBAction func editMeme(sender: AnyObject) {
         memeEditPresenter.present(meme, animated: true, viewState: MemeEditViewController.initialViewState.Edit)
+        navigationController?.popToRootViewControllerAnimated(true)
     }
 }
