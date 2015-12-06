@@ -29,7 +29,7 @@ class MemeCollectionViewController: UICollectionViewController {
         collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         // Do any additional setup after loading the view.
-        adjustFlowLayout(self.view.frame.size)
+        adjustFlowLayout(view.frame.size)
         memeDetailsPresenter = MemeDetailsPresenter(presenter: self)
         memeEditPresenter = MemeEditPresenter(presenter: self)
 
