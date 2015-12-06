@@ -87,6 +87,12 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
         unsubscribeFromKeyboardNotifications()
     }
     
+    /* dismiss the keyboard for each text field on return */
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return false
+    }
+    
     /* helper function to abstract the presentation of the image picker controller with a specific source type */
     func pickAnImageHelper(sourceType: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
