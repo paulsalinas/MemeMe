@@ -203,13 +203,23 @@ class MemeEditViewController: UIViewController, UIImagePickerControllerDelegate,
     
     /* save the current memeImage */
     func save() {
-        //Create the meme
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: memedImage)
+        if  let meme = meme {
+
+            //edit the existing meme if it exists
+            meme.topText = topTextField.text!
+            meme.bottomText = bottomTextField.text!
+            meme.originalImage = imagePickerView.image!
+            meme.memedImage = memedImage
+        } else {
         
-        //add the meme to the shared data model
-        let object = UIApplication.sharedApplication().delegate
-        let appDelegate = object as! AppDelegate
-        appDelegate.memesCollection.appendMeme(meme)
+            //create the meme if it doesn't exist
+            let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: memedImage)
+        
+            //add the meme to the shared data model
+            let object = UIApplication.sharedApplication().delegate
+            let appDelegate = object as! AppDelegate
+            appDelegate.memesCollection.appendMeme(meme)
+        }
         
     }
 }

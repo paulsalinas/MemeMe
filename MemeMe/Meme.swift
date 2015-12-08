@@ -9,9 +9,16 @@
 import Foundation
 import UIKit
 
-struct Meme {
+class Meme {
     var topText, bottomText: String
     var originalImage, memedImage: UIImage
+    
+    init(topText: String, bottomText: String, originalImage: UIImage, memedImage: UIImage){
+        self.topText = topText
+        self.bottomText = bottomText
+        self.originalImage = originalImage
+        self.memedImage = memedImage
+    }
     
     /* the text attributes for the text labels in the meme */
     static func getTextAttributes(fontSize: CGFloat) -> [String: NSObject]
